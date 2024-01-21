@@ -1,0 +1,56 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* 使body占满整个视口高度 */
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1; /* 让main占满剩余的高度 */
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+
+.contact-info, .footer-links, .social-media, .copyright {
+    margin-bottom: 15px;
+}
+
+.contact-info p {
+    margin-bottom: 5px;
+}
+
+.footer-links a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+.social-media a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive styling */
+@media screen and (max-width: 600px) {
+    .footer-links, .social-media {
+        margin-top: 15px;
+    }
+
+    .footer-links a, .social-media a {
+        display: block;
+        margin: 5px 0;
+    }
+}
