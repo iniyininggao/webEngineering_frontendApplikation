@@ -1,9 +1,7 @@
-name: Development Workflow
-
 on:
   push:
     branches:
-      - development
+      - main
 
 jobs:
   test-and-lint:
@@ -26,3 +24,21 @@ jobs:
 
       - name: Run Linting
         run: npm run lint
+
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Build and Deploy
+        run: npm run build
