@@ -1,5 +1,6 @@
-import * as scooterJsonData from './public/SCOOTERABSTELLOGD.json';
 import { navigationHTML } from './component/navbar/navbar';
+import * as scooterJsonData from './public/SCOOTERABSTELLOGD.json';
+
 
 let map;
 const navElement: HTMLElement = document.getElementById('nav')!;
@@ -9,16 +10,15 @@ const numOfJsonData = scooterJsonData.totalFeatures;
 
 navElement.innerHTML = navigationHTML;
 
-function scooterJsonDataParse (ScooterJsonData:{ features: any[] }, map:any) {
- if(ScooterJsonData != null) {
+function scooterJsonDataParse (scooterJsonData:{ features: any[] }, map:any) {
+ if(scooterJsonData != null) {
   for (let i = 0; i < numOfJsonData; i++){
-    const scotterLongitude : number = ScooterJsonData.features[i].geometry.coordinates[0];
-    const scotterLatitude : number = ScooterJsonData.features[i].geometry.coordinates[1];
-    const scooterAdresse : string = ScooterJsonData.features[i].properties.ADRESSE;
-    const scooterBezirk : number = ScooterJsonData.features[i].properties.BEZIRK;
-    const scooterAnzahl : number = ScooterJsonData.features[i].properties.ANZ_SCOOTER;
-    //console.log(scooterBezirk)
-  
+    const scotterLongitude : number = scooterJsonData.features[i].geometry.coordinates[0];
+    const scotterLatitude : number = scooterJsonData.features[i].geometry.coordinates[1];
+    const scooterAdresse : string = scooterJsonData.features[i].properties.ADRESSE;
+    const scooterBezirk : number = scooterJsonData.features[i].properties.BEZIRK;
+    const scooterAnzahl : number = scooterJsonData.features[i].properties.ANZ_SCOOTER;
+
     addNewMapsPosition(map, scotterLatitude, scotterLongitude, scooterAdresse, scooterBezirk, scooterAnzahl);
    }
  }else{
@@ -26,29 +26,29 @@ function scooterJsonDataParse (ScooterJsonData:{ features: any[] }, map:any) {
  }
 }
 
-function addNewMapsPosition (map:any, ScotterLatitude: number, ScotterLongitude: number, ScooterAdresse: string, ScooterBezirk: number, ScooterAnzahl: any) {
+function addNewMapsPosition (map:any, scotterLatitude: number, scotterLongitude: number, scooterAdresse: string, scooterBezirk: number, scooterAnzahl: any) {
   let title: string;
 
-  if (ScooterBezirk < 10) {
-    title = 'Adresse des Scooterabstellplatz: ' + ScooterAdresse + ', 10' + ScooterBezirk + '0, Wien';
+  if (scooterBezirk < 10) {
+    title = 'Adresse des Scooterabstellplatz: ' + scooterAdresse + ', 10' + scooterBezirk + '0, Wien';
   } else {
-    title = 'Adresse des Scooterabstellplatz: ' + ScooterAdresse + ', 1' + ScooterBezirk + '0, Wien';
+    title = 'Adresse des Scooterabstellplatz: ' + scooterAdresse + ', 1' + scooterBezirk + '0, Wien';
   }
 
   const marker = new AdvancedMarkerElement({
     map: map,
-    position: { lat: ScotterLatitude, lng: ScotterLongitude },
+    position: { lat: scotterLatitude, lng: scotterLongitude },
     title: title,
   });
 
   marker.addListener("click", () => {
-    if (ScooterAnzahl != null) {
-      title = 'Anzahl vom Scooter des Scooterabstellplatz: ' + ScooterAnzahl;
+    if (scooterAnzahl != null) {
+      title = 'Anzahl vom Scooter des Scooterabstellplatz: ' + scooterAnzahl;
     } else {
       title = 'Anzahl vom Scooter des Scooterabstellplatz: Unbekannt' ;
     }
     map.setZoom(18);
-    map.setCenter({ lat: ScotterLatitude, lng: ScotterLongitude });
+    map.setCenter({ lat: scotterLatitude, lng: scotterLongitude });
     marker.title = title;
   });
 }
@@ -58,12 +58,14 @@ async function initMap(): Promise<void> {
   map = new Map(
     document.getElementById('map') as HTMLElement,
     {
-      zoom: 16,
       center: position,
       mapId: 'Scooterabstellplätze Wien',
+      zoom: 16,
     }
   );
   scooterJsonDataParse(scooterJsonData, map);
 }
 
 initMap();
+
+// export default scooterJsonDataParse; addNewMapsPosition;

@@ -1,0 +1,21 @@
+{
+    "extends": [
+      "tslint:recommended",
+      "tslint-config-airbnb",
+      "tslint-config-prettier"
+    ],
+    "rules": {
+    },
+    "plugins": [
+      "tslint-plugin-prettier"
+    ],
+    "overrides": [
+      {
+        "files": ["*.ts"],
+        "rules": {
+          "prettier": true
+        }
+      }
+    ]
+  }
+  
