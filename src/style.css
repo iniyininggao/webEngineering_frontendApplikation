@@ -1,32 +1,71 @@
 h1 {
-    margin: 0; 
+  margin: 0;
 }
 
-#map { 
-    height: 480px; 
-    width: 600px;
-    position: relative;
-    left: 50%;
-    transform: translate(-50%, 0);
-    padding-top: 20px;
+#map {
+  height: 480px;
+  width: 60%; 
+  margin: 0 auto; 
+  position: relative;
+  padding-top: 20px;
 }
+
 
 #welcomewords {
-    text-align: center;
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 20px;
+  text-align: center;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+#welcomewords h1 {
+  font-size: 2.5em;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+#welcomewords h3 {
+  font-size: 1.2em;
+  color: #666;
+  line-height: 1.5;
+}
+
+
+@media (max-width: 1440px) {
+  #map {
+      width: 60%; 
   }
-  
+
+  #welcomewords {
+      padding: 10px;  
+  }
+
   #welcomewords h1 {
-    font-size: 2.5em;
-    color: #333; 
-    margin-bottom: 20px;
+      font-size: 2em; 
+      margin-bottom: 15px; 
   }
-  
+
   #welcomewords h3 {
-    font-size: 1.2em;
-    color: #666; 
-    line-height: 1.5;
+      font-size: 1em; 
   }
-  
+}
+
+@media (max-width: 360px) {
+  #map {
+      width: 70%;
+      height: 250px;   
+  }
+
+  #welcomewords {
+      padding: 5px;
+  }
+
+  #welcomewords h1 {
+      font-size: 1.5em; 
+      margin-bottom: 10px; 
+  }
+
+  #welcomewords h3 {
+      font-size: 0.8em; 
+  }
+}

@@ -1,0 +1,166 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+ 
+nav {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #333;
+    overflow: hidden;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex; 
+}
+
+nav a {
+    display: flex;
+    justify-content: flex-end;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+nav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+ 
+@media (min-width: 1920px) {
+    nav {
+        font-size: 18px;
+    }
+
+    nav a {
+        padding: 15px;
+    }
+
+    #description h1 {
+        font-size: 2.5em;
+    }
+
+    #description h2 {
+        font-size: 2em;
+    }
+
+    #description h3 {
+        font-size: 1.2em;
+    }
+
+    #description p {
+        font-size: 1em;
+    }
+
+    #description a {
+        font-size: 1em;
+    }
+}
+ 
+@media (max-width: 1440px) {
+    nav {
+        font-size: 16px;
+    }
+
+    nav a {
+        padding: 12px;
+    }
+
+    #description h1 {
+        font-size: 2.2em;
+    }
+
+    #description h2 {
+        font-size: 1.8em;
+    }
+
+    #description h3 {
+        font-size: 1.1em;
+    }
+
+    #description p {
+        font-size: 0.9em;
+    }
+
+    #description a {
+        font-size: 0.9em;
+    }
+}
+ 
+@media (max-width: 360px) {
+    nav {
+        font-size: 14px;
+    }
+
+    nav a {
+        padding: 10px;
+    }
+
+    #description h1 {
+        font-size: 2em;
+    }
+
+    #description h2 {
+        font-size: 1.6em;
+    }
+
+    #description h3 {
+        font-size: 1em;
+    }
+
+    #description p {
+        font-size: 0.8em;
+    }
+
+    #description a {
+        font-size: 0.8em;
+    }
+}
+
+#description {
+    text-align: center;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+#description h1 {
+    font-size: 2.5em;
+    color: #333; 
+    margin-bottom: 20px;
+}
+
+#description h2 {
+    font-size: 2em;
+    color: #333; 
+    margin-bottom: 20px;
+}
+
+#description h3 {
+    font-size: 1.2em;
+    color: #666; 
+    line-height: 1.5;
+}
+
+#description p {
+    font-size: 1em;
+    color: #666; 
+    line-height: 1.5;
+}
+
+#description a {
+    font-size: 1em;
+    color: #007BFF;
+    text-decoration: none;
+}
+
+#description a:hover {
+    text-decoration: underline;
+}
+

@@ -10,29 +10,51 @@ const numOfJsonData = scooterJsonData.totalFeatures;
 navElement.innerHTML = navigationHTML;
 
 function scooterJsonDataParse (ScooterJsonData:{ features: any[] }, map:any) {
- for (let i = 0; i < numOfJsonData; i++){
-  //const scooterGeo = ScooterJsonData.features[i].geometry;
-  const scotterLongitude = ScooterJsonData.features[i].geometry.coordinates[0];
-  const scotterLatitude = ScooterJsonData.features[i].geometry.coordinates[1];
-  const scooterAdresse = ScooterJsonData.features[i].properties.ADRESSE;
-  const scooterAnzahl = ScooterJsonData.features[i].properties.ANZ_SCOOTER;
-  //console.log(scooterGeo)
-
-  addNewMapsPosition(map, scotterLatitude, scotterLongitude, scooterAdresse);
+ if(ScooterJsonData != null) {
+  for (let i = 0; i < numOfJsonData; i++){
+    const scotterLongitude : number = ScooterJsonData.features[i].geometry.coordinates[0];
+    const scotterLatitude : number = ScooterJsonData.features[i].geometry.coordinates[1];
+    const scooterAdresse : string = ScooterJsonData.features[i].properties.ADRESSE;
+    const scooterBezirk : number = ScooterJsonData.features[i].properties.BEZIRK;
+    const scooterAnzahl : number = ScooterJsonData.features[i].properties.ANZ_SCOOTER;
+    //console.log(scooterBezirk)
+  
+    addNewMapsPosition(map, scotterLatitude, scotterLongitude, scooterAdresse, scooterBezirk, scooterAnzahl);
+   }
+ }else{
+  alert("Failed to fetch scooter data")
  }
 }
 
-function addNewMapsPosition (map:any, ScotterLatitude: number, ScotterLongitude: number, ScooterAdresse: string) {
+function addNewMapsPosition (map:any, ScotterLatitude: number, ScotterLongitude: number, ScooterAdresse: string, ScooterBezirk: number, ScooterAnzahl: any) {
+  let title: string;
+
+  if (ScooterBezirk < 10) {
+    title = 'Adresse des Scooterabstellplatz: ' + ScooterAdresse + ', 10' + ScooterBezirk + '0, Wien';
+  } else {
+    title = 'Adresse des Scooterabstellplatz: ' + ScooterAdresse + ', 1' + ScooterBezirk + '0, Wien';
+  }
+
   const marker = new AdvancedMarkerElement({
     map: map,
     position: { lat: ScotterLatitude, lng: ScotterLongitude },
-    title: 'Scooterabstellplatz: ' + ScooterAdresse
+    title: title,
+  });
+
+  marker.addListener("click", () => {
+    if (ScooterAnzahl != null) {
+      title = 'Anzahl vom Scooter des Scooterabstellplatz: ' + ScooterAnzahl;
+    } else {
+      title = 'Anzahl vom Scooter des Scooterabstellplatz: Unbekannt' ;
+    }
+    map.setZoom(18);
+    map.setCenter({ lat: ScotterLatitude, lng: ScotterLongitude });
+    marker.title = title;
   });
 }
 
 async function initMap(): Promise<void> {
   const position = { lat: 48.21553363, lng: 16.32815609 };
-
   map = new Map(
     document.getElementById('map') as HTMLElement,
     {
@@ -41,7 +63,6 @@ async function initMap(): Promise<void> {
       mapId: 'Scooterabstellplätze Wien',
     }
   );
-
   scooterJsonDataParse(scooterJsonData, map);
 }
 
