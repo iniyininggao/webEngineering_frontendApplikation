@@ -1,5 +1,3 @@
-name: Deployment Workflow
-
 on:
   push:
     branches:
@@ -7,6 +5,25 @@ on:
 
 jobs:
   test-and-lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Tests
+        run: npm test
+
+      - name: Run Linting
+        run: npm run lint
 
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -30,4 +47,4 @@ jobs:
         run: npm run lint
 
       - name: Build and Deploy
-        run: npm run build && your-deployment-command
+        run: npm run build
