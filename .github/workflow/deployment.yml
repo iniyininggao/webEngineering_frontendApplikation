@@ -1,12 +1,14 @@
-name: Development Workflow
+name: Deployment Workflow
 
 on:
   push:
     branches:
-      - development
+      - main
 
 jobs:
   test-and-lint:
+
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -26,3 +28,6 @@ jobs:
 
       - name: Run Linting
         run: npm run lint
+
+      - name: Build and Deploy
+        run: npm run build && your-deployment-command
